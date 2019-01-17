@@ -1,0 +1,30 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+
+entity contador_6b is
+    port ( en_cnt,reset_cnt,clock: IN std_logic;
+			  
+			  data_out: buffer std_logic_vector(5 downto 0):="000000");
+end contador_6b;
+
+architecture solucion of contador_6b is
+
+    signal var:std_logic_vector(5 downto 0):= "000000";
+	 begin
+    process (reset_cnt, clock)
+	    begin
+		 
+		 var<=data_out;
+		 
+		 if reset_cnt='0' then data_out<="000000";
+		 elsif clock'event and clock='1' then
+		  if (en_cnt='1')then
+		   data_out<=var+"000001";
+			end if;
+		end if;
+		
+	end process;
+	
+end solucion;
